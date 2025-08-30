@@ -1,0 +1,20 @@
+/* @import "tailwindcss"; */
+
+* * {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #e5e7eb inset !important;
+  box-shadow: 0 0 0 1000px #e5e7eb inset !important;
+  -webkit-text-fill-color: #374151 !important;
+}
+
+/* input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  box-shadow: 0 0 0px 1000px white inset !important;
+} */
