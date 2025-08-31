@@ -141,9 +141,9 @@ const NavBar = () => {
                   disableRestoreFocus
                 >
                   <Typography sx={{ p: 1, bgcolor: "#101828", color: "white" }}>
-                    Ready to create events?,
+                    You have to be SignedIn!
                     <br />
-                    SignIn!!
+                    to view this page
                   </Typography>
                 </Popover>
               </Typography>
