@@ -16,6 +16,7 @@ const defaultValues: DefaultValues<IForgotPassword> = {
 };
 
 const ForgotPassword = () => {
+  const [email, setEmail] = useState("");
   const MultiUseWallpaper = Assets.IMAGES.MULTIUSEBACKGROUND;
   const GenBackground = Assets.IMAGES.GEN_BACKGROUND;
 
@@ -41,6 +42,7 @@ const ForgotPassword = () => {
 
     try {
       await passwordReset(data.emailAddress, redirectUrl);
+      setEmail(data.emailAddress);
       setIsResetEmailSent(true);
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
@@ -60,14 +62,14 @@ const ForgotPassword = () => {
     <>
       {!isResetEmailSent ? (
         <div
-          className="w-full flex p-4 items-center justify-center min-h-[100vh] bg-center bg-cover"
+          className="md:w-full flex p-4 items-center justify-center min-h-[100vh] bg-center bg-cover"
           style={{ backgroundImage: `url(${GenBackground})` }}
         >
           <div
-            className="w-4/5 flex flex-row min-h-[75vh] gap-3 px-16 rounded-2xl items-center bg-cover bg-center"
+            className="w-full md:w-4/5 flex flex-row md:min-h-[75vh] gap-3 md:px-16 rounded-2xl items-center bg-cover bg-center"
             style={{ backgroundImage: `url(${MultiUseWallpaper})` }}
           >
-            <div className="w-1/2 min-h-[55vh] flex flex-col gap-4 p-8 pl-12 items-start rounded-2xl bg-gray-200">
+            <div className="w-full md:w-1/2 min-h-[75vh] md:min-h-[55vh] p-4 flex flex-col gap-4 md:p-8 md:pl-12 items-start rounded-2xl bg-gray-200">
               <span
                 onClick={() => navigate(-1)}
                 className="flex flex-row gap-3 text-gray-700 items-center justify-center cursor-pointer"
@@ -88,7 +90,7 @@ const ForgotPassword = () => {
                   </button>
                 </div>
               )}
-              <div className="flex flex-col items-center gap-3 pt-5">
+              <div className="flex flex-col items-center gap-3 pt-12 md:pt-5">
                 <h1 className="tems-center font-bold text-2xl">
                   Forgot Password
                 </h1>
@@ -137,11 +139,11 @@ const ForgotPassword = () => {
                 </button>
               </form>
             </div>
-            <div className="w-1/2 min-h-[55vh] flex flex-col items-start px-3 py-4 gap-5"></div>
+            <div className="hidden w-1/2 min-h-[55vh] md:flex flex-col items-start px-3 py-4 gap-5"></div>
           </div>
         </div>
       ) : (
-        <CheckEmail />
+        <CheckEmail email={email} />
       )}
     </>
   );

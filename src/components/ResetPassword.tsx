@@ -21,6 +21,9 @@ const defaultValues: DefaultValues<IResetPassword> = {
 };
 
 const ResetPassword = () => {
+  const MultiUseWallpaper = Assets.IMAGES.MULTIUSEBACKGROUND;
+  const GenBackground = Assets.IMAGES.GEN_BACKGROUND;
+
   const [verified, setVerified] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -41,7 +44,6 @@ const ResetPassword = () => {
       .catch(() => setError("The password reset link is invalid or expired."));
   }, [oobCode]);
 
-  const MultiUseWallpaper = Assets.IMAGES.MULTIUSEBACKGROUND;
   const form = useForm<IResetPassword>({ defaultValues, mode: "onChange" });
   const { register, handleSubmit, formState, watch, reset } = form;
   const { errors, isDirty, isSubmitting, isValid } = formState;
@@ -101,12 +103,15 @@ const ResetPassword = () => {
     );
   }
   return (
-    <div className="w-full flex p-4 items-center justify-center min-h-[100vh] bg-center bg-cover">
+    <div
+      className="w-full flex p-4 items-center justify-center min-h-[100vh] bg-center bg-cover"
+      style={{ backgroundImage: `url(${GenBackground})` }}
+    >
       <div
-        className="w-4/5 flex flex-row min-h-[75vh] gap-3 px-16 rounded-2xl items-center bg-cover bg-center"
+        className="w-4/5 flex flex-row min-h-[75vh] gap-3 md:px-16 rounded-2xl items-center bg-cover bg-center"
         style={{ backgroundImage: `url(${MultiUseWallpaper})` }}
       >
-        <div className="w-1/2 min-h-[55vh] flex flex-col items-start gap-4 p-8 pl-12 rounded-2xl bg-gray-200">
+        <div className="w-full md:w-1/2 min-h-[75vh]  md:min-h-[55vh] flex flex-col items-start gap-4 p-8 pl-12 rounded-2xl bg-gray-200">
           <span
             onClick={() => navigate("/forgot_password")}
             className="flex flex-row gap-3 text-gray-700 items-center justify-center cursor-pointer"
@@ -242,7 +247,7 @@ const ResetPassword = () => {
             </button>
           </form>
         </div>
-        <div className="w-full flex flex-col gap-2"></div>
+        <div className="hidden w-full md:flex flex-col gap-2"></div>
       </div>
     </div>
   );
