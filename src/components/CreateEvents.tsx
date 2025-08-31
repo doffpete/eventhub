@@ -109,6 +109,31 @@ const CreateEvents = () => {
           return;
         }
       }
+      if (data.eventBanner) {
+        const formData = new FormData();
+        formData.append("file", data.eventBanner);
+        formData.append("upload_preset", "unsigned preset");
+
+        try {
+          const res = await fetch(
+            "https://api.cloudinary.com/v1_1/dn8o8lwrq/image/upload",
+            {
+              method: "POST",
+              body: formData,
+            }
+          );
+
+          if (!res.ok) {
+            throw new Error("Failed to upload image to Cloudinary");
+          }
+
+          const uploadResult = await res.json();
+          bannerUrl = uploadResult.secure_url;
+        } catch (error) {
+          showBoundary(error);
+          return;
+        }
+      }
 
       await setDoc(doc(db, EVENTS_COLLECTION, eventId), {
         eventTitle: data.eventTitle,
