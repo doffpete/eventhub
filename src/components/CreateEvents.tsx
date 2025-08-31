@@ -13,11 +13,10 @@ import {
 } from "react-hook-form";
 import { useAuth } from "../auth/useAuth";
 import { doc, setDoc } from "firebase/firestore";
-import { db, storage } from "../firebase";
+import { db } from "../firebase";
 import type { Dayjs } from "dayjs";
 import dayjs from "dayjs";
 import { v4 as uuidv4 } from "uuid";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { FirebaseError } from "firebase/app";
 import { useErrorBoundary } from "react-error-boundary";
 import { useNavigate } from "react-router-dom";
@@ -95,20 +94,6 @@ const CreateEvents = () => {
         import.meta.env.MODE === "production" ? "events" : "events_dev";
 
       let bannerUrl = "";
-      if (data.eventBanner) {
-        const bannerRef = ref(
-          storage,
-          `event-banners/${user.uid}/${eventId}/${data.eventBanner.name}`
-        );
-
-        try {
-          await uploadBytes(bannerRef, data.eventBanner);
-          bannerUrl = await getDownloadURL(bannerRef);
-        } catch (error) {
-          showBoundary(error);
-          return;
-        }
-      }
       if (data.eventBanner) {
         const formData = new FormData();
         formData.append("file", data.eventBanner);

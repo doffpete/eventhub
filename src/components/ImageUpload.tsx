@@ -73,7 +73,7 @@ function ImageUpload({ value, onFileChange }: ImageUploaderProps) {
           <button
             type="button"
             onClick={clearFile}
-            className="flex bg-gray-400 font-normal hover:text-white text-white px-3 py-1 text-center cursor-pointer rounded-2xl"
+            className="flex bg-gray-400 font-normal hover:bg-gray-700 hover:text-white text-white px-3 py-1 text-center cursor-pointer rounded-2xl"
           >
             <p className="text-center items-center">cancel</p>
           </button>
