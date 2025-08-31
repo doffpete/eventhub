@@ -42,7 +42,7 @@ const EventCard = ({
               {toTitleCase(eventTitle)}
             </p>
           </button>
-          <p className="text-sm font-normal text-gray-600  overflow-scroll">
+          <p className="text-sm text-gray-600 font-semibold overflow-scroll">
             {eventStartDate?.isValid()
               ? eventStartDate.format("MMMM D, YYYY h:mm A")
               : "No date"}
